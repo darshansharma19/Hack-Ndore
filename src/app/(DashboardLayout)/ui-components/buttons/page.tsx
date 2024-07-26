@@ -4,22 +4,27 @@ import React, { useState, useEffect } from 'react';
 
 interface DataItem {
   Category: string;
-  "Expiry Date/Last Maintenance": string; // Date string
+  "Expiry Date/Last Maintenance": string; 
   "Item ID": string;
   Location: string;
-  "Manufacturing Date": string; // Date string
+  "Manufacturing Date": string; 
   Name: string;
   Notes: string;
-  Quantity: string; // Quantity as a string
+  Quantity: string; 
   Status: string;
 }
+
+const formatDate = (dateString: string) => {
+  const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
+  return new Date(dateString).toLocaleDateString(undefined, options);
+};
 
 const App: React.FC = () => {
   const [data, setData] = useState<DataItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Function to fetch data from the API
+  
   const fetchData = async () => {
     setLoading(true);
     setError(null);
@@ -28,7 +33,7 @@ const App: React.FC = () => {
       const response = await fetch('https://waterapi-xdy7.onrender.com/fetch');
 
       if (!response.ok) {
-        const errorText = await response.text(); // Get the error message from the response
+        const errorText = await response.text(); 
         throw new Error(`API fetch failed: ${response.statusText} - ${errorText}`);
       }
 
@@ -57,7 +62,7 @@ const App: React.FC = () => {
   return (
     <div>
       <h1>Data Table</h1>
-      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+      <table style={{ width: '100%', borderCollapse: 'collapse', border: '1px solid #ddd' }}>
         <thead>
           <tr>
             <th>Category</th>
@@ -78,8 +83,8 @@ const App: React.FC = () => {
               <td>{item["Item ID"]}</td>
               <td>{item.Name}</td>
               <td>{item.Quantity}</td>
-              <td>{item["Manufacturing Date"]}</td>
-              <td>{item["Expiry Date/Last Maintenance"]}</td>
+              <td>{formatDate(item["Manufacturing Date"])}</td>
+              <td>{formatDate(item["Expiry Date/Last Maintenance"])}</td>
               <td>{item.Location}</td>
               <td>{item.Status}</td>
               <td>{item.Notes}</td>
