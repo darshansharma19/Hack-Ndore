@@ -19,14 +19,14 @@ const Menuitems = [
   },
   {
     id: uniqueId(),
-    title: "HealthCare",
-    icon: HealthCareIcon,
+    title: "Water Supply",
+    icon: WaterSupplyIcon,
     href: "/ui-components/buttons",
   },
   {
     id: uniqueId(),
-    title: "Water Supply",
-    icon: WaterSupplyIcon,
+    title: "HealthCare",
+    icon: HealthCareIcon,
     href: "/ui-components/forms",
   },
   {
