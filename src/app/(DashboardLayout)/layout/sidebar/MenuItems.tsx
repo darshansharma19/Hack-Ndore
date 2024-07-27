@@ -6,7 +6,8 @@ import {
   Star as RatingsIcon,
   Image as ImagesIcon,
   DirectionsCar as TransportationIcon,
-  HelpOutline as RequestIcon
+  HelpOutline as RequestIcon,
+  ContactMail as CommunicationIcon // Import the ContactMail icon
 } from '@mui/icons-material';
 import { uniqueId } from 'lodash';
 
@@ -37,17 +38,17 @@ const Menuitems = [
   },
   {
     id: uniqueId(),
+    title: "Communication",
+    icon: CommunicationIcon, // Use the ContactMail icon for Communication
+    href: "/ui-components/images",
+  },
+  {
+    id: uniqueId(),
     title: "Request",
     icon: RequestIcon,
     href: "/ui-components/alerts",
   },
 
-  // {
-  //   id: uniqueId(),
-  //   title: "Images",
-  //   icon: ImagesIcon,
-  //   href: "/ui-components/images",
-  // },
   // {
   //   id: uniqueId(),
   //   title: "Alerts",

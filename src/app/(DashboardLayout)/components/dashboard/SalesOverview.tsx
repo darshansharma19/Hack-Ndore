@@ -1,15 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import dynamic from "next/dynamic";
 import BaseCard from "../shared/DashboardCard";
+import axios from "axios";
+
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-const SalesOverview = () => {
+const WaterSupplyOverview: React.FC = () => {
   const theme = useTheme();
   const primary = theme.palette.primary.main;
   const secondary = theme.palette.secondary.main;
 
-  const optionssalesoverview: any = {
+  const [data, setData] = useState<number[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://waterapi-xdy7.onrender.com/fetch');
+        const fetchedData = response.data;
+        
+        // Assuming the API returns an array of objects with a "quantity" property
+        const formattedData = fetchedData.map((item: any) => item.quantity);
+
+        setData(formattedData);
+      } catch (error: any) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const optionsWaterSupplyOverview: any = {
     grid: {
       show: true,
       borderColor: "transparent",
@@ -28,7 +54,6 @@ const SalesOverview = () => {
         borderRadius: 5,
       },
     },
-
     colors: [primary, secondary],
     fill: {
       type: "solid",
@@ -57,18 +82,8 @@ const SalesOverview = () => {
     xaxis: {
       type: "category",
       categories: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "July",
-        "Aug",
-        "Sept",
-        "Oct",
-        "Nov",
-        "Dec",
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
       ],
       labels: {
         style: {
@@ -78,8 +93,8 @@ const SalesOverview = () => {
     },
     yaxis: {
       show: true,
-      min: 100,
-      max: 400,
+      min: 0,
+      max: Math.max(...data) + 50,  // Dynamically set max value
       tickAmount: 3,
       labels: {
         style: {
@@ -97,21 +112,22 @@ const SalesOverview = () => {
       theme: "dark",
     },
   };
-  const seriessalesoverview: any = [
+
+  const seriesWaterSupplyOverview: any = [
     {
-      name: "Ample Admin",
-      data: [355, 390, 300, 350, 390, 180, 355, 390, 300, 350, 390, 180],
-    },
-    {
-      name: "Pixel Admin",
-      data: [280, 250, 325, 215, 250, 310, 280, 250, 325, 215, 250, 310],
-    },
+      name: "Water Supply",
+      data: data,
+    }
   ];
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
   return (
-    <BaseCard title="Sales Overview">
+    <BaseCard title="Water Supply Overview">
       <Chart
-        options={optionssalesoverview}
-        series={seriessalesoverview}
+        options={optionsWaterSupplyOverview}
+        series={seriesWaterSupplyOverview}
         type="bar"
         height="295px"
       />
@@ -119,4 +135,4 @@ const SalesOverview = () => {
   );
 };
 
-export default SalesOverview;
+export default WaterSupplyOverview;
