@@ -1,84 +1,90 @@
 'use client';
+
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import {
-    Paper,
-    Grid,
-    Stack,
-    Alert,AlertTitle
-} from '@mui/material'
+  Grid,
+  Stack,
+  TextField,
+  MenuItem,
+  Button,
+  Paper,
+  Container
+} from '@mui/material';
 import BaseCard from '@/app/(DashboardLayout)/components/shared/BaseCard';
-// import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
-// const Item = styled(Paper)(({ theme }) => ({
-//     ...theme.typography.body1,
-//     textAlign: 'center',
-//     color: theme.palette.text.secondary,
-//     height: 60,
-//     lineHeight: '60px',
-//   }));
-  
 
+const RequestForm: React.FC = () => {
+  const [category, setCategory] = useState<string>('');
+  const [type, setType] = useState<string>('');
+  const [quantity, setQuantity] = useState<string>('');
+  const [dueDate, setDueDate] = useState<string>('');
 
-const Alerts = () => {
-    return (
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Handle form submission logic here
+    console.log({ category, type, quantity, dueDate });
+  };
+
+  return (
+    <Container>
       <Grid container spacing={3}>
-        <Grid item xs={12} lg={12}>
-          <BaseCard title="Alerts">
-            <Stack spacing={2}>
-              <Alert severity="error" >
-                This is an error alert — check it out!
-              </Alert>
-              <Alert severity="warning">
-                This is a warning alert — check it out!
-              </Alert>
-              <Alert severity="info">This is an info alert — check it out!</Alert>
-              <Alert severity="success">
-                This is a success alert — check it out!
-              </Alert>
-            </Stack>
-          </BaseCard>
-        </Grid> 
-        <Grid item xs={12} lg={12}>
-          <BaseCard title="Alerts Outline">
-            <Stack spacing={2}>
-              <Alert severity="error" variant="outlined">
-                This is an error alert — check it out!
-              </Alert>
-              <Alert severity="warning" variant="outlined">
-                This is a warning alert — check it out!
-              </Alert>
-              <Alert severity="info" variant="outlined">
-                This is an info alert — check it out!
-              </Alert>
-              <Alert severity="success" variant="outlined">
-                This is a success alert — check it out!
-              </Alert>
-            </Stack>
-          </BaseCard>
-        </Grid>
-        <Grid item xs={12} lg={12}>
-          <BaseCard title="Alert with Desc">
-            <Stack spacing={2}>
-              <Alert severity="error">
-                <AlertTitle>Error</AlertTitle>
-                This is an error alert — <strong>check it out!</strong>
-              </Alert>
-              <Alert severity="warning">
-                <AlertTitle>Warning</AlertTitle>
-                This is a warning alert — <strong>check it out!</strong>
-              </Alert>
-              <Alert severity="info">
-                <AlertTitle>Info</AlertTitle>
-                This is an info alert — <strong>check it out!</strong>
-              </Alert>
-              <Alert severity="success">
-                <AlertTitle>Success</AlertTitle>
-                This is a success alert — <strong>check it out!</strong>
-              </Alert>
-            </Stack>
+        <Grid item xs={12}>
+          <BaseCard title="Request Form">
+            <Paper style={{ padding: '16px' }}>
+              <form onSubmit={handleSubmit}>
+                <Stack spacing={2}>
+                  <TextField
+                    select
+                    label="Category"
+                    value={category}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setCategory(e.target.value)}
+                    fullWidth
+                    required
+                  >
+                    <MenuItem value="Healthcare">Healthcare</MenuItem>
+                    <MenuItem value="Water Supply">Water Supply</MenuItem>
+                    <MenuItem value="Transportation">Transportation</MenuItem>
+                  </TextField>
+
+                  <TextField
+                    label="Type"
+                    value={type}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setType(e.target.value)}
+                    fullWidth
+                    required
+                  />
+
+                  <TextField
+                    type="number"
+                    label="Quantity"
+                    value={quantity}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setQuantity(e.target.value)}
+                    fullWidth
+                    required
+                  />
+
+                  <TextField
+                    type="date"
+                    label="Due Date"
+                    value={dueDate}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setDueDate(e.target.value)}
+                    fullWidth
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    required
+                  />
+
+                  <Button type="submit" variant="contained" color="primary">
+                    Submit Request
+                  </Button>
+                </Stack>
+              </form>
+            </Paper>
           </BaseCard>
         </Grid>
       </Grid>
-    );
-  };
-  
-  export default Alerts;
-  
+    </Container>
+  );
+};
+
+export default RequestForm;

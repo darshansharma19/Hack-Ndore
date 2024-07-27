@@ -39,7 +39,7 @@ const Menuitems = [
     id: uniqueId(),
     title: "Request",
     icon: RequestIcon,
-    href: "/ui-components/request",
+    href: "/ui-components/alerts",
   },
 
   // {
