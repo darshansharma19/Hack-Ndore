@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, TablePagination } from '@mui/material';
 import BaseCard from '@/app/(DashboardLayout)/components/shared/BaseCard';
 import axios from 'axios';
 
@@ -21,6 +21,8 @@ const BasicRating: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [editDialogOpen, setEditDialogOpen] = useState<boolean>(false);
   const [currentItem, setCurrentItem] = useState<DataItem | null>(null);
+  const [page, setPage] = useState<number>(0);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(6);
 
   useEffect(() => {
     const fetchApiData = async () => {
@@ -67,6 +69,15 @@ const BasicRating: React.FC = () => {
     }
   };
 
+  const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
   if (loading) return <Typography>Loading...</Typography>;
   if (error) return <Typography>Error fetching data: {error}</Typography>;
 
@@ -74,7 +85,7 @@ const BasicRating: React.FC = () => {
     <Grid container spacing={3}>
       <Grid item xs={12} lg={12}>
         <BaseCard title="Water Supply Data">
-          <Box sx={{ mt: 2 }}>
+          <Box sx={{ mt: 2, maxHeight: '400px', overflow: 'auto' }}>
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
@@ -86,7 +97,7 @@ const BasicRating: React.FC = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {apiData.map((row, index) => (
+                  {apiData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
                     <TableRow key={index}>
                       {Object.values(row).map((value, idx) => (
                         <TableCell key={idx}>{String(value)}</TableCell>
@@ -115,6 +126,15 @@ const BasicRating: React.FC = () => {
                 </TableBody>
               </Table>
             </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[6, 10, 25]}
+              component="div"
+              count={apiData.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
           </Box>
         </BaseCard>
       </Grid>
