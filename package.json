@@ -26,6 +26,8 @@
     "date-fns": "^3.6.0",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.3",
+    "i18next": "^23.12.2",
+    "i18next-browser-languagedetector": "^8.0.0",
     "lodash": "^4.17.21",
     "next": "13.4.12",
     "papaparse": "^5.4.1",

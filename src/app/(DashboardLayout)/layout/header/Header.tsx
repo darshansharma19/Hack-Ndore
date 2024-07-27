@@ -21,7 +21,7 @@ const Header = ({ toggleMobileSidebar }: HeaderProps) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('https://a08b-115-245-99-238.ngrok-free.app/ask', {
+      const response = await fetch('https://3717-115-245-99-238.ngrok-free.app/ask', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
