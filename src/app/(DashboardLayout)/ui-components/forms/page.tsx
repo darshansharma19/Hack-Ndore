@@ -116,8 +116,20 @@ const Forms = () => {
           </Grid>
         </Grid>
       </Grid>
-
-      <Grid item xs={12} lg={12}>
+      <Grid item xs={12} container spacing={3}>
+          <Grid item xs={12} md={6}>
+            <BaseCard>
+              <iframe
+                src="/plots/hospital_inventory_map.html"
+                width="100%"
+                height="400"
+                style={{ border: 'none' }}
+                title="Items by Status"
+              ></iframe>
+            </BaseCard>
+          </Grid>
+        </Grid>
+        <Grid item xs={12} lg={12}>
         <BaseCard title="HealthCare Data">
           <TableContainer component={Paper}>
             <Table>
@@ -184,7 +196,6 @@ const Forms = () => {
           </TableContainer>
         </BaseCard>
       </Grid>
-
       <Dialog open={editDialogOpen} onClose={() => setEditDialogOpen(false)}>
         <DialogTitle>Edit Item</DialogTitle>
         <DialogContent>
