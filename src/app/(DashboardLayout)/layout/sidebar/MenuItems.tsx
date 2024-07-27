@@ -7,7 +7,8 @@ import {
   Image as ImagesIcon,
   DirectionsCar as TransportationIcon,
   HelpOutline as RequestIcon,
-  ContactMail as CommunicationIcon // Import the ContactMail icon
+  ContactMail as CommunicationIcon,
+  Group as TeamIcon // Use Group or any other suitable icon for Team
 } from '@mui/icons-material';
 import { uniqueId } from 'lodash';
 
@@ -39,8 +40,14 @@ const Menuitems = [
   {
     id: uniqueId(),
     title: "Communication",
-    icon: CommunicationIcon, // Use the ContactMail icon for Communication
+    icon: CommunicationIcon,
     href: "/ui-components/images",
+  },
+  {
+    id: uniqueId(),
+    title: "Team",
+    icon: TeamIcon, // Use the appropriate icon for Team
+    href: "/ui-components/table",
   },
   {
     id: uniqueId(),
@@ -48,7 +55,6 @@ const Menuitems = [
     icon: RequestIcon,
     href: "/ui-components/alerts",
   },
-
   // {
   //   id: uniqueId(),
   //   title: "Alerts",
@@ -60,12 +66,6 @@ const Menuitems = [
   //   title: "Pagination",
   //   icon: IconUser,
   //   href: "/ui-components/pagination",
-  // },
-  // {
-  //   id: uniqueId(),
-  //   title: "Table",
-  //   icon: IconLayoutGrid,
-  //   href: "/ui-components/table",
   // },
 ];
 
