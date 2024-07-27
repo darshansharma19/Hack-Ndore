@@ -15,11 +15,11 @@ const WaterSupplyOverview: React.FC = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div style={{ display: 'flex', gap: '16px' }}>
+    <div style={{ display: "flex", gap: "16px" }}>
       <div style={{ flex: 1 }}>
         <BaseCard>
           <iframe
-            src="https://80e2-115-245-99-238.ngrok-free.app/plot/items_by_status"
+            src="/plots/items_by_status.html"
             width="100%"
             height="300"
             style={{ border: "none" }}
@@ -30,10 +30,10 @@ const WaterSupplyOverview: React.FC = () => {
       <div style={{ flex: 1 }}>
         <BaseCard>
           <iframe
-            src="https://80e2-115-245-99-238.ngrok-free.app/plot/quantity_by_category"
+            src="/plots/quantity_by_category.html"
             width="100%"
             height="300"
-            style={{ border: "none" }}
+            style={{border: "none"}}
             title="Quantity by Category"
           ></iframe>
         </BaseCard>

@@ -1,8 +1,7 @@
 'use client';
-import React, { useState } from 'react';
-import { AppBar, Button, Drawer, Grid, IconButton, List, ListItem, ListItemText, Paper, TextField, Toolbar, Typography } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { AppBar, Drawer, List, ListItem, ListItemText, Paper, TextField, Toolbar, Typography, Box, Grid, IconButton, Avatar } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
-import MenuIcon from '@mui/icons-material/Menu';
 
 interface Message {
   text: string;
@@ -10,123 +9,119 @@ interface Message {
 }
 
 const Chat = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [message, setMessage] = useState('');
-  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [messages, setMessages] = useState<{ [key: string]: Message[] }>({
+    'John Smith': [
+      { text: 'Hey, how are you?', sender: 'John Smith' },
+      { text: 'I am good, thanks!', sender: 'me' }
+    ],
+    'Allison Grayce': [
+      { text: 'Can we meet tomorrow?', sender: 'Allison Grayce' },
+      { text: 'Sure, what time?', sender: 'me' }
+    ],
+    'Mike Jones': [
+      { text: 'Hey, I\'m back in town...you wanna meet-up for coffee?', sender: 'me' },
+      { text: 'Yeah that sounds great! Have a new project to run by you.', sender: 'Mike Jones' },
+      { text: 'Awesome, let\'s meet at the coffee shop on South Broadway. What time works best for you?', sender: 'me' },
+      { text: 'Have a meeting today, but I\'ll be free around 4pm.', sender: 'Mike Jones' },
+      { text: 'Perfect, see ya then.', sender: 'me' }
+    ]
+  });
+  const [newMessage, setNewMessage] = useState('');
+  const [selectedUser, setSelectedUser] = useState('Mike Jones');
 
-  const handleSendMessage = () => {
-    if (message.trim()) {
-      setMessages([...messages, { text: message, sender: 'You' }]);
-      setMessage('');
+  useEffect(() => {
+    // Add styles to body to make it non-scrollable
+    document.body.style.overflow = 'hidden';
+    
+    // Cleanup function to reset the style
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+
+  const handleSend = () => {
+    if (newMessage.trim()) {
+      setMessages({
+        ...messages,
+        [selectedUser]: [...messages[selectedUser], { text: newMessage, sender: 'me' }]
+      });
+      setNewMessage('');
     }
   };
 
-  const handleReceiveMessage = (text: string) => {
-    setMessages([...messages, { text, sender: 'Other' }]);
-  };
-
-  const toggleDrawer = () => {
-    setDrawerOpen(!drawerOpen);
+  const handleUserSelect = (user: string) => {
+    setSelectedUser(user);
   };
 
   return (
-    <div style={{ height: '100vh', display: 'flex' }}>
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <AppBar position="static">
+    <Box display="flex" height="90vh" overflow="hidden">
+      <Drawer
+        variant="permanent"
+        anchor="left"
+        sx={{ width: '240px', flexShrink: 0, '& .MuiDrawer-paper': { width: '240px', boxSizing: 'border-box' } }}
+      >
+        <Toolbar />
+        <Box sx={{ overflow: 'auto' }}>
+          <List>
+            {Object.keys(messages).map((user, index) => (
+              <ListItem button key={index} onClick={() => handleUserSelect(user)}>
+                <ListItemText primary={user} />
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      </Drawer>
+      <Box flexGrow={1} display="flex" flexDirection="column" height="100vh">
+        <AppBar position="static" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
           <Toolbar>
-            <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer} sx={{ mr: 2 }}>
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Group Chat
+            <Typography variant="h6" sx={{ flexGrow: 1 }}>
+              {selectedUser}
             </Typography>
-            <Button color="inherit" onClick={() => handleReceiveMessage('Hello!')}>
-              Simulate Incoming
-            </Button>
+            <Avatar src="/path/to/avatar.jpg" alt="User Avatar" />
           </Toolbar>
         </AppBar>
-        <div style={{ display: 'flex', flex: 1 }}>
-          {drawerOpen && (
-            <Drawer
-              variant="persistent"
-              anchor="left"
-              open={drawerOpen}
-              style={{ width: 250, flexShrink: 0 }}
-              PaperProps={{ style: { width: 250, position: 'relative' } }}
-            >
-              <div style={{ width: 250 }}>
-                <Toolbar>
-                  <Typography variant="h6" noWrap>
-                    People
-                  </Typography>
-                </Toolbar>
-                <List>
-                  <ListItem>
-                    <ListItemText primary="You" />
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText primary="Other" />
-                  </ListItem>
-                  {/* Add more connected people here */}
-                </List>
-              </div>
-            </Drawer>
-          )}
-          <Paper style={{ flex: 1, overflow: 'auto', padding: '1rem' }}>
-            <List>
-              {messages.map((msg, index) => (
-                <ListItem
-                  key={index}
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: msg.sender === 'You' ? 'flex-end' : 'flex-start',
-                  }}
-                >
-                  <Typography variant="caption" color="textSecondary" style={{ alignSelf: 'flex-start' }}>
-                    {msg.sender}
-                  </Typography>
-                  <Paper
-                    style={{
-                      padding: '0.5rem 1rem',
-                      backgroundColor: msg.sender === 'You' ? '#e1f5fe' : '#f1f1f1',
-                      maxWidth: '70%',
-                    }}
-                  >
-                    <ListItemText primary={msg.text} />
-                  </Paper>
-                </ListItem>
-              ))}
-            </List>
-          </Paper>
-        </div>
-        <Grid container spacing={2} style={{ padding: '1rem' }}>
-          <Grid item xs={10}>
-            <TextField
-              fullWidth
-              variant="outlined"
-              label="Type your message"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              onKeyPress={(e) => {
-                if (e.key === 'Enter') handleSendMessage();
-              }}
-            />
+        <Box flexGrow={1} p={2} component={Paper} display="flex" flexDirection="column" overflow="hidden">
+          <Grid container direction="column" spacing={2} sx={{ flexGrow: 1, overflow: 'auto' }}>
+            {messages[selectedUser]?.map((message, index) => (
+              <Grid item key={index} alignSelf={message.sender === 'me' ? 'flex-end' : 'flex-start'}>
+                <Paper style={{ padding: '10px', backgroundColor: message.sender === 'me' ? '#e0f7fa' : '#f0f0f0', maxWidth: '100%' }}>
+                  <Typography>{message.text}</Typography>
+                </Paper>
+              </Grid>
+            ))}
           </Grid>
-          <Grid item xs={2}>
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              onClick={handleSendMessage}
-              endIcon={<SendIcon />}
-            >
-              Send
-            </Button>
-          </Grid>
-        </Grid>
-      </div>
-    </div>
+        </Box>
+        <Box p={2} display="flex" alignItems="center" component={Paper} sx={{ position: 'sticky', bottom: 0 }}>
+          <TextField
+            fullWidth
+            variant="outlined"
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            placeholder="Type a message"
+            sx={{ mr: 2 }}
+          />
+          <IconButton color="primary" onClick={handleSend}>
+            <SendIcon />
+          </IconButton>
+        </Box>
+      </Box>
+      <Drawer
+        variant="permanent"
+        anchor="right"
+        sx={{ width: '240px', flexShrink: 0, '& .MuiDrawer-paper': { width: '240px', boxSizing: 'border-box' } }}
+      >
+        <Toolbar />
+        <Box sx={{ overflow: 'auto' }}>
+          <List>
+            {Object.keys(messages).map((user, index) => (
+              <ListItem button key={index} onClick={() => handleUserSelect(user)}>
+                <ListItemText primary={user} />
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      </Drawer>
+    </Box>
   );
 };
 

@@ -16,6 +16,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  TablePagination,
 } from '@mui/material';
 import BaseCard from '@/app/(DashboardLayout)/components/shared/BaseCard';
 
@@ -33,6 +34,8 @@ interface DataItem {
 
 const Forms = () => {
   const [data, setData] = useState<DataItem[]>([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(6);
   const [editDialogOpen, setEditDialogOpen] = useState<boolean>(false);
   const [currentItem, setCurrentItem] = useState<DataItem | null>(null);
 
@@ -73,8 +76,47 @@ const Forms = () => {
     }
   };
 
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
   return (
     <Grid container spacing={3}>
+      <Grid container spacing={3}>
+        {/* Two cards in the first row */}
+        <Grid item xs={12} container spacing={3}>
+          <Grid item xs={12} md={6}>
+            <BaseCard>
+              <iframe
+                src="\plots\equipment_service_timeline.html"
+                width="100%"
+                height="400"
+                style={{ border: 'none' }}
+                title="Items by Status"
+              ></iframe>
+            </BaseCard>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <BaseCard>
+              <iframe
+                src="\plots\expiry_date_distribution.html"
+                width="100%"
+                height="400"
+                style={{ border: 'none' }}
+                title="Quantity by Category"
+              ></iframe>
+            </BaseCard>
+          </Grid>
+        </Grid>
+      </Grid>
+
       <Grid item xs={12} lg={12}>
         <BaseCard title="HealthCare Data">
           <TableContainer component={Paper}>
@@ -94,40 +136,51 @@ const Forms = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {data.map((row) => (
-                  <TableRow key={row['Item ID']}>
-                    <TableCell>{row['Category']}</TableCell>
-                    <TableCell>{row['Expiry Date/Last Maintenance']}</TableCell>
-                    <TableCell>{row['Item ID']}</TableCell>
-                    <TableCell>{row['Location']}</TableCell>
-                    <TableCell>{row['Manufacturing Date']}</TableCell>
-                    <TableCell>{row['Name']}</TableCell>
-                    <TableCell>{row['Notes']}</TableCell>
-                    <TableCell>{row['Quantity']}</TableCell>
-                    <TableCell>{row['Status']}</TableCell>
-                    <TableCell>
-                      <Button 
-                        variant="contained" 
-                        color="primary" 
-                        size="small" 
-                        onClick={() => handleEdit(row)}
-                        style={{ marginRight: 8 }}
-                      >
-                        Edit
-                      </Button>
-                      <Button 
-                        variant="contained" 
-                        color="secondary" 
-                        size="small" 
-                        onClick={() => handleDelete(row['Item ID'])}
-                      >
-                        Delete
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                {data
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => (
+                    <TableRow key={row['Item ID']}>
+                      <TableCell>{row['Category']}</TableCell>
+                      <TableCell>{row['Expiry Date/Last Maintenance']}</TableCell>
+                      <TableCell>{row['Item ID']}</TableCell>
+                      <TableCell>{row['Location']}</TableCell>
+                      <TableCell>{row['Manufacturing Date']}</TableCell>
+                      <TableCell>{row['Name']}</TableCell>
+                      <TableCell>{row['Notes']}</TableCell>
+                      <TableCell>{row['Quantity']}</TableCell>
+                      <TableCell>{row['Status']}</TableCell>
+                      <TableCell>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          size="small"
+                          onClick={() => handleEdit(row)}
+                          style={{ marginRight: 8 }}
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          size="small"
+                          onClick={() => handleDelete(row['Item ID'])}
+                        >
+                          Delete
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
+            <TablePagination
+              rowsPerPageOptions={[6, 12, 24]}
+              component="div"
+              count={data.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
           </TableContainer>
         </BaseCard>
       </Grid>
