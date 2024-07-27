@@ -110,7 +110,7 @@ const BasicRating: React.FC = () => {
           <Grid item xs={12} md={6}>
             <BaseCard>
               <iframe
-                src="http://192.168.137.203:5000/plot/items_by_status"
+                src="https://80e2-115-245-99-238.ngrok-free.app/plot/items_by_status"
                 width="100%"
                 height="400"
                 style={{ border: "none" }}
@@ -121,7 +121,7 @@ const BasicRating: React.FC = () => {
           <Grid item xs={12} md={6}>
             <BaseCard>
               <iframe
-                src="http://192.168.137.203:5000/plot/quantity_by_category"
+                src="https://80e2-115-245-99-238.ngrok-free.app/plot/quantity_by_category"
                 width="100%"
                 height="400"
                 style={{ border: "none" }}
@@ -136,7 +136,7 @@ const BasicRating: React.FC = () => {
           <Grid item xs={12} md={8} lg={6}>
             <BaseCard>
               <iframe
-                src="http://192.168.137.203:5000/plot/quantity_by_location"
+                src="https://80e2-115-245-99-238.ngrok-free.app/plot/quantity_by_location"
                 width="100%"
                 height="400"
                 style={{ border: "none" }}
