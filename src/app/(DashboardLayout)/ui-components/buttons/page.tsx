@@ -1,17 +1,33 @@
-'use client';
-import React, { useState, useEffect } from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, TablePagination } from '@mui/material';
-import BaseCard from '@/app/(DashboardLayout)/components/shared/BaseCard';
-import axios from 'axios';
+"use client";
+import React, { useState, useEffect } from "react";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import {
+  Grid,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+  TablePagination,
+} from "@mui/material";
+import BaseCard from "@/app/(DashboardLayout)/components/shared/BaseCard";
+import axios from "axios";
 
 interface DataItem {
   [key: string]: any;
 }
 
 const fetchData = async () => {
-  const response = await axios.get('https://waterapi-xdy7.onrender.com/fetch');
+  const response = await axios.get("https://waterapi-xdy7.onrender.com/fetch");
   return response.data;
 };
 
@@ -50,9 +66,9 @@ const BasicRating: React.FC = () => {
 
   const handleSave = () => {
     if (currentItem) {
-      setApiData(prevData =>
-        prevData.map(item =>
-          item['Item ID'] === currentItem['Item ID'] ? currentItem : item
+      setApiData((prevData) =>
+        prevData.map((item) =>
+          item["Item ID"] === currentItem["Item ID"] ? currentItem : item
         )
       );
       setEditDialogOpen(false);
@@ -69,11 +85,16 @@ const BasicRating: React.FC = () => {
     }
   };
 
-  const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number
+  ) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
@@ -84,62 +105,6 @@ const BasicRating: React.FC = () => {
   return (
     <Box sx={{ flexGrow: 1, p: 3 }}>
       <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <BaseCard title="Water Supply Data">
-            <Box sx={{ mt: 2, maxHeight: '400px', overflow: 'auto' }}>
-              <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                  <TableHead>
-                    <TableRow>
-                      {apiData.length > 0 && Object.keys(apiData[0]).map((key) => (
-                        <TableCell key={key}>{key}</TableCell>
-                      ))}
-                      <TableCell>Actions</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {apiData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
-                      <TableRow key={index}>
-                        {Object.values(row).map((value, idx) => (
-                          <TableCell key={idx}>{String(value)}</TableCell>
-                        ))}
-                        <TableCell>
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            size="small"
-                            onClick={() => handleEdit(row)}
-                            style={{ marginRight: 8 }}
-                          >
-                            Edit
-                          </Button>
-                          <Button
-                            variant="contained"
-                            color="secondary"
-                            size="small"
-                            onClick={() => handleDelete(index)}
-                          >
-                            Delete
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-              <TablePagination
-                rowsPerPageOptions={[6, 10, 25]}
-                component="div"
-                count={apiData.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-              />
-            </Box>
-          </BaseCard>
-        </Grid>
-
         {/* Two cards in the first row */}
         <Grid item xs={12} container spacing={3}>
           <Grid item xs={12} md={6}>
@@ -181,7 +146,64 @@ const BasicRating: React.FC = () => {
           </Grid>
         </Grid>
       </Grid>
-
+      <Grid item xs={12}>
+        <BaseCard title="Water Supply Data">
+          <Box sx={{ mt: 2, maxHeight: "400px", overflow: "auto" }}>
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    {apiData.length > 0 &&
+                      Object.keys(apiData[0]).map((key) => (
+                        <TableCell key={key}>{key}</TableCell>
+                      ))}
+                    <TableCell>Actions</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {apiData
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row, index) => (
+                      <TableRow key={index}>
+                        {Object.values(row).map((value, idx) => (
+                          <TableCell key={idx}>{String(value)}</TableCell>
+                        ))}
+                        <TableCell>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            size="small"
+                            onClick={() => handleEdit(row)}
+                            style={{ marginRight: 8 }}
+                          >
+                            Edit
+                          </Button>
+                          <Button
+                            variant="contained"
+                            color="secondary"
+                            size="small"
+                            onClick={() => handleDelete(index)}
+                          >
+                            Delete
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[6, 10, 25]}
+              component="div"
+              count={apiData.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </Box>
+        </BaseCard>
+      </Grid>
       <Dialog open={editDialogOpen} onClose={() => setEditDialogOpen(false)}>
         <DialogTitle>Edit Item</DialogTitle>
         <DialogContent>
