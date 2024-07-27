@@ -3,6 +3,7 @@ import { Box, AppBar, Toolbar, styled, Stack, IconButton, TextField, Button, Cir
 import PropTypes from 'prop-types';
 import { IconMenu2, IconChevronDown, IconChevronUp } from '@tabler/icons-react';
 import Profile from './Profile';
+import TranslateIcon from '@mui/icons-material/Translate'; // Import the language translation icon
 
 interface HeaderProps {
   toggleMobileSidebar: (event: React.MouseEvent<HTMLElement>) => void;
@@ -70,20 +71,24 @@ const Header = ({ toggleMobileSidebar }: HeaderProps) => {
           >
             <IconMenu2 width="20" height="20" />
           </IconButton>
-          <Box flexGrow={1} />
-          <Typography
-            variant="h2"
-            component="div"
-            sx={{
-              flexGrow: 1,
-              textAlign: 'center',
-              fontWeight: 'bold',
-              color: '#FFA500' ,
-            }}
-          >
-            Inventory Management System for IMC
-          </Typography>
+          <Box flexGrow={1} display="flex" alignItems="center" justifyContent="center">
+            <Typography
+              variant="h2"
+              component="div"
+              sx={{
+                flexGrow: 1,
+                textAlign: 'center',
+                fontWeight: 'bold',
+                color: '#FFA500', // Orange color for text
+              }}
+            >
+              Inventory Management System for IMC
+            </Typography>
+          </Box>
           <Stack spacing={1} direction="row" alignItems="center">
+            <IconButton color="inherit" aria-label="language-translate">
+              <TranslateIcon />
+            </IconButton>
             <Profile />
             <Tooltip title="Quick Search" arrow>
               <IconButton
@@ -116,7 +121,7 @@ const Header = ({ toggleMobileSidebar }: HeaderProps) => {
             {error && <Typography color="error" style={{ marginTop: '20px' }}>{error}</Typography>}
             {tankCount !== null && !loading && !error && (
               <Typography variant="h6" style={{ marginTop: '20px' }}>
-                Tank Count: {tankCount}
+              {tankCount}
               </Typography>
             )}
           </Box>
