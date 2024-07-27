@@ -8,7 +8,11 @@ import {
   MenuItem,
   Button,
   Paper,
-  Container
+  Container,
+  Card,
+  CardContent,
+  Typography,
+  Box
 } from '@mui/material';
 import BaseCard from '@/app/(DashboardLayout)/components/shared/BaseCard';
 
@@ -17,17 +21,22 @@ const RequestForm: React.FC = () => {
   const [type, setType] = useState<string>('');
   const [quantity, setQuantity] = useState<string>('');
   const [dueDate, setDueDate] = useState<string>('');
+  const [requests, setRequests] = useState<any[]>([]);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log({ category, type, quantity, dueDate });
+    const newRequest = { category, type, quantity, dueDate };
+    setRequests([...requests, newRequest]);
+    setCategory('');
+    setType('');
+    setQuantity('');
+    setDueDate('');
   };
 
   return (
     <Container>
       <Grid container spacing={3}>
-        <Grid item xs={12}>
+        <Grid item xs={12} md={4}>
           <BaseCard title="Request Form">
             <Paper style={{ padding: '16px' }}>
               <form onSubmit={handleSubmit}>
@@ -81,6 +90,43 @@ const RequestForm: React.FC = () => {
               </form>
             </Paper>
           </BaseCard>
+        </Grid>
+
+        <Grid item xs={12} md={8}>
+          {requests.length > 0 && (
+            <BaseCard title="Submitted Requests">
+              <Box sx={{ position: 'relative' }}>
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    top: 0,
+                    right: 0,
+                    backgroundColor: 'red',
+                    color: 'white',
+                    padding: '4px 8px',
+                    borderRadius: '0 0 0 4px',
+                    fontWeight: 'bold',
+                    fontSize: '14px',
+                  }}
+                >
+                  Active Requests
+                </Box>
+                <Box display="flex" flexDirection="column" gap={2} mt={4}>
+                  {requests.map((request, index) => (
+                    <Card key={index}>
+                      <CardContent>
+                        <Typography variant="h6">Request {index + 1}</Typography>
+                        <Typography><strong>Category:</strong> {request.category}</Typography>
+                        <Typography><strong>Type:</strong> {request.type}</Typography>
+                        <Typography><strong>Quantity:</strong> {request.quantity}</Typography>
+                        <Typography><strong>Due Date:</strong> {request.dueDate}</Typography>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </Box>
+              </Box>
+            </BaseCard>
+          )}
         </Grid>
       </Grid>
     </Container>

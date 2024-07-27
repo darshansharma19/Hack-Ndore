@@ -30,10 +30,10 @@ const Chat = () => {
   const [selectedUser, setSelectedUser] = useState('Mike Jones');
 
   useEffect(() => {
-    // Add styles to body to make it non-scrollable
+    
     document.body.style.overflow = 'hidden';
     
-    // Cleanup function to reset the style
+    
     return () => {
       document.body.style.overflow = 'auto';
     };
