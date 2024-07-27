@@ -82,61 +82,104 @@ const BasicRating: React.FC = () => {
   if (error) return <Typography>Error fetching data: {error}</Typography>;
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12} lg={12}>
-        <BaseCard title="Water Supply Data">
-          <Box sx={{ mt: 2, maxHeight: '400px', overflow: 'auto' }}>
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    {apiData.length > 0 && Object.keys(apiData[0]).map((key) => (
-                      <TableCell key={key}>{key}</TableCell>
-                    ))}
-                    <TableCell>Actions</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {apiData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
-                    <TableRow key={index}>
-                      {Object.values(row).map((value, idx) => (
-                        <TableCell key={idx}>{String(value)}</TableCell>
+    <Box sx={{ flexGrow: 1, p: 3 }}>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <BaseCard title="Water Supply Data">
+            <Box sx={{ mt: 2, maxHeight: '400px', overflow: 'auto' }}>
+              <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      {apiData.length > 0 && Object.keys(apiData[0]).map((key) => (
+                        <TableCell key={key}>{key}</TableCell>
                       ))}
-                      <TableCell>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          size="small"
-                          onClick={() => handleEdit(row)}
-                          style={{ marginRight: 8 }}
-                        >
-                          Edit
-                        </Button>
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          size="small"
-                          onClick={() => handleDelete(index)}
-                        >
-                          Delete
-                        </Button>
-                      </TableCell>
+                      <TableCell>Actions</TableCell>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            <TablePagination
-              rowsPerPageOptions={[6, 10, 25]}
-              component="div"
-              count={apiData.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          </Box>
-        </BaseCard>
+                  </TableHead>
+                  <TableBody>
+                    {apiData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
+                      <TableRow key={index}>
+                        {Object.values(row).map((value, idx) => (
+                          <TableCell key={idx}>{String(value)}</TableCell>
+                        ))}
+                        <TableCell>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            size="small"
+                            onClick={() => handleEdit(row)}
+                            style={{ marginRight: 8 }}
+                          >
+                            Edit
+                          </Button>
+                          <Button
+                            variant="contained"
+                            color="secondary"
+                            size="small"
+                            onClick={() => handleDelete(index)}
+                          >
+                            Delete
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              <TablePagination
+                rowsPerPageOptions={[6, 10, 25]}
+                component="div"
+                count={apiData.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
+            </Box>
+          </BaseCard>
+        </Grid>
+
+        {/* Two cards in the first row */}
+        <Grid item xs={12} container spacing={3}>
+          <Grid item xs={12} md={6}>
+            <BaseCard>
+              <iframe
+                src="http://192.168.137.203:5000/plot/items_by_status"
+                width="100%"
+                height="400"
+                style={{ border: "none" }}
+                title="Items by Status"
+              ></iframe>
+            </BaseCard>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <BaseCard>
+              <iframe
+                src="http://192.168.137.203:5000/plot/quantity_by_category"
+                width="100%"
+                height="400"
+                style={{ border: "none" }}
+                title="Quantity by Category"
+              ></iframe>
+            </BaseCard>
+          </Grid>
+        </Grid>
+
+        {/* Single centered card */}
+        <Grid item xs={12} container justifyContent="center">
+          <Grid item xs={12} md={8} lg={6}>
+            <BaseCard>
+              <iframe
+                src="http://192.168.137.203:5000/plot/quantity_by_location"
+                width="100%"
+                height="400"
+                style={{ border: "none" }}
+                title="Quantity by Location"
+              ></iframe>
+            </BaseCard>
+          </Grid>
+        </Grid>
       </Grid>
 
       <Dialog open={editDialogOpen} onClose={() => setEditDialogOpen(false)}>
@@ -163,7 +206,7 @@ const BasicRating: React.FC = () => {
           <Button onClick={handleSave}>Save</Button>
         </DialogActions>
       </Dialog>
-    </Grid>
+    </Box>
   );
 };
 
