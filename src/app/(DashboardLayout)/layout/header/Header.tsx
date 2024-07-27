@@ -71,6 +71,18 @@ const Header = ({ toggleMobileSidebar }: HeaderProps) => {
             <IconMenu2 width="20" height="20" />
           </IconButton>
           <Box flexGrow={1} />
+          <Typography
+            variant="h2"
+            component="div"
+            sx={{
+              flexGrow: 1,
+              textAlign: 'center',
+              fontWeight: 'bold',
+              color: '#FFA500' ,
+            }}
+          >
+            Inventory Management System for IMC
+          </Typography>
           <Stack spacing={1} direction="row" alignItems="center">
             <Profile />
             <Tooltip title="Quick Search" arrow>
@@ -88,9 +100,6 @@ const Header = ({ toggleMobileSidebar }: HeaderProps) => {
       {!isCollapsed && (
         <Container>
           <Box display="flex" flexDirection="column" alignItems="center" mt={4}>
-            <Typography variant="h4" gutterBottom>
-              {/* Title or description */}
-            </Typography>
             <form onSubmit={handleSubmit} style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', width: '100%' }}>
               <TextField
                 label="Question"
