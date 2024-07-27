@@ -19,7 +19,7 @@ const WaterSupplyOverview: React.FC = () => {
       <div style={{ flex: 1 }}>
         <BaseCard>
           <iframe
-            src="https://225a-115-245-99-238.ngrok-free.app/plot/items_by_status"
+            src="https://80e2-115-245-99-238.ngrok-free.app/plot/items_by_status"
             width="100%"
             height="300"
             style={{ border: "none" }}
@@ -30,7 +30,7 @@ const WaterSupplyOverview: React.FC = () => {
       <div style={{ flex: 1 }}>
         <BaseCard>
           <iframe
-            src="https://225a-115-245-99-238.ngrok-free.app/plot/quantity_by_category"
+            src="https://80e2-115-245-99-238.ngrok-free.app/plot/quantity_by_category"
             width="100%"
             height="300"
             style={{ border: "none" }}

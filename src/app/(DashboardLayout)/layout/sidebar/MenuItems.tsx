@@ -8,7 +8,7 @@ import {
   DirectionsCar as TransportationIcon,
   HelpOutline as RequestIcon,
   ContactMail as CommunicationIcon,
-  Group as TeamIcon // Use Group or any other suitable icon for Team
+  Group as TeamIcon 
 } from '@mui/icons-material';
 import { uniqueId } from 'lodash';
 
@@ -46,7 +46,7 @@ const Menuitems = [
   {
     id: uniqueId(),
     title: "Team",
-    icon: TeamIcon, // Use the appropriate icon for Team
+    icon: TeamIcon, 
     href: "/ui-components/table",
   },
   {
