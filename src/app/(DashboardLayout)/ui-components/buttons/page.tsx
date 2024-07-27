@@ -1,99 +1,150 @@
 'use client';
-
 import React, { useState, useEffect } from 'react';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import BaseCard from '@/app/(DashboardLayout)/components/shared/BaseCard';
+import axios from 'axios';
 
 interface DataItem {
-  Category: string;
-  "Expiry Date/Last Maintenance": string; 
-  "Item ID": string;
-  Location: string;
-  "Manufacturing Date": string; 
-  Name: string;
-  Notes: string;
-  Quantity: string; 
-  Status: string;
+  [key: string]: any;
 }
 
-const formatDate = (dateString: string) => {
-  const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
-  return new Date(dateString).toLocaleDateString(undefined, options);
+const fetchData = async () => {
+  const response = await axios.get('https://waterapi-xdy7.onrender.com/fetch');
+  return response.data;
 };
 
-const App: React.FC = () => {
-  const [data, setData] = useState<DataItem[]>([]);
+const BasicRating: React.FC = () => {
+  const [apiData, setApiData] = useState<DataItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [editDialogOpen, setEditDialogOpen] = useState<boolean>(false);
+  const [currentItem, setCurrentItem] = useState<DataItem | null>(null);
 
-  
-  const fetchData = async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const response = await fetch('https://waterapi-xdy7.onrender.com/fetch');
-
-      if (!response.ok) {
-        const errorText = await response.text(); 
-        throw new Error(`API fetch failed: ${response.statusText} - ${errorText}`);
+  useEffect(() => {
+    const fetchApiData = async () => {
+      try {
+        const data = await fetchData();
+        setApiData(data);
+      } catch (error: any) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
       }
+    };
 
-      const apiData: DataItem[] = await response.json();
-      setData(apiData);
-    } catch (error) {
-      if (error instanceof Error) {
-        console.error('Error fetching data:', error.message);
-        setError(`Failed to fetch data: ${error.message}`);
-      } else {
-        console.error('Unexpected error:', error);
-        setError('Failed to fetch data due to an unexpected error.');
-      }
-    } finally {
-      setLoading(false);
+    fetchApiData();
+  }, []);
+
+  const handleEdit = (item: DataItem) => {
+    setCurrentItem(item);
+    setEditDialogOpen(true);
+  };
+
+  const handleDelete = (index: number) => {
+    setApiData(apiData.filter((_, i) => i !== index));
+  };
+
+  const handleSave = () => {
+    if (currentItem) {
+      setApiData(prevData =>
+        prevData.map(item =>
+          item['Item ID'] === currentItem['Item ID'] ? currentItem : item
+        )
+      );
+      setEditDialogOpen(false);
+      setCurrentItem(null);
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (currentItem) {
+      setCurrentItem({
+        ...currentItem,
+        [e.target.name]: e.target.value,
+      });
+    }
+  };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  if (loading) return <Typography>Loading...</Typography>;
+  if (error) return <Typography>Error fetching data: {error}</Typography>;
 
   return (
-    <div>
-      <h1>Data Table</h1>
-      <table style={{ width: '100%', borderCollapse: 'collapse', border: '1px solid #ddd' }}>
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>Item ID</th>
-            <th>Name</th>
-            <th>Quantity</th>
-            <th>Manufacturing Date</th>
-            <th>Expiry Date/Last Maintenance</th>
-            <th>Location</th>
-            <th>Status</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map(item => (
-            <tr key={item["Item ID"]}>
-              <td>{item.Category}</td>
-              <td>{item["Item ID"]}</td>
-              <td>{item.Name}</td>
-              <td>{item.Quantity}</td>
-              <td>{formatDate(item["Manufacturing Date"])}</td>
-              <td>{formatDate(item["Expiry Date/Last Maintenance"])}</td>
-              <td>{item.Location}</td>
-              <td>{item.Status}</td>
-              <td>{item.Notes}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <Grid container spacing={3}>
+      <Grid item xs={12} lg={12}>
+        <BaseCard title="Water Supply Data">
+          <Box sx={{ mt: 2 }}>
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    {apiData.length > 0 && Object.keys(apiData[0]).map((key) => (
+                      <TableCell key={key}>{key}</TableCell>
+                    ))}
+                    <TableCell>Actions</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {apiData.map((row, index) => (
+                    <TableRow key={index}>
+                      {Object.values(row).map((value, idx) => (
+                        <TableCell key={idx}>{String(value)}</TableCell>
+                      ))}
+                      <TableCell>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          size="small"
+                          onClick={() => handleEdit(row)}
+                          style={{ marginRight: 8 }}
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          size="small"
+                          onClick={() => handleDelete(index)}
+                        >
+                          Delete
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Box>
+        </BaseCard>
+      </Grid>
+
+      <Dialog open={editDialogOpen} onClose={() => setEditDialogOpen(false)}>
+        <DialogTitle>Edit Item</DialogTitle>
+        <DialogContent>
+          {currentItem && (
+            <>
+              {Object.keys(currentItem).map((key) => (
+                <TextField
+                  key={key}
+                  margin="dense"
+                  label={key}
+                  name={key}
+                  value={currentItem[key]}
+                  onChange={handleChange}
+                  fullWidth
+                />
+              ))}
+            </>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setEditDialogOpen(false)}>Cancel</Button>
+          <Button onClick={handleSave}>Save</Button>
+        </DialogActions>
+      </Dialog>
+    </Grid>
   );
 };
 
-export default App;
+export default BasicRating;
