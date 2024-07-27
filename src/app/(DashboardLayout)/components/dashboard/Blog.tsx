@@ -9,25 +9,25 @@ import user3 from "public/images/backgrounds/u4.jpg";
 const blogs = [
   {
     img: user1,
-    title: "Super awesome, Next 14 is coming soon!",
-    subtitle:
-      "Some quick example text to build on the card title and make up the bulk of the card's content.",
+    title: "Water Supply Services in INDORE",
+    subtitle: "An overview of water supply services in Indore, highlighting key metrics, operational insights, and service coverage.",
     btncolor: "error.main",
+    link: "/ui-components/buttons" 
   },
   {
     img: user2,
-    title: "Super awesome, Next 14 is coming soon!",
-    subtitle:
-      "Some quick example text to build on the card title and make up the bulk of the card's content.",
+    title: "Health Care Services in INDORE",
+    subtitle: "A summary of health care services in Indore, focusing on key facilities, service availability, and health initiatives.",
     btncolor: "warning.main",
+    link: "/ui-components/forms" 
   },
   {
     img: user3,
-    title: "Super awesome, Next 14 is coming soon!",
-    subtitle:
-      "Some quick example text to build on the card title and make up the bulk of the card's content.",
+    title: "Transportation Services in Indore",
+    subtitle: "An overview of transportation options in Indore, including public transit, taxi services, and other modes of travel.",
     btncolor: "primary.main",
-  },
+    link: "/ui-components/ratings" 
+  }
 ];
 
 const BlogCard = () => {
@@ -79,8 +79,9 @@ const BlogCard = () => {
                     backgroundColor: blog.btncolor,
                   },
                 }}
+                href={blog.link} 
               >
-                Learn More
+                Visit Page
               </Button>
             </CardContent>
           </Card>
