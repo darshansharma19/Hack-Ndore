@@ -15,45 +15,45 @@ import BaseCard from "../shared/DashboardCard";
 const products = [
   {
     id: "1",
-    name: "Sunil Joshi",
-    post: "Web Designer",
-    pname: "Elite Admin",
+    name: "Dr. Alice Johnson",
+    post: "Cardiologist",
+    pname: "Cardiac Care Project",
     priority: "Low",
     pbg: "primary.main",
     budget: "3.9",
   },
   {
     id: "2",
-    name: "Andrew McDownland",
-    post: "Project Manager",
-    pname: "Real Homes WP Theme",
+    name: "Mr. Mark Thompson",
+    post: "Principal",
+    pname: "School Renovation",
     priority: "Medium",
     pbg: "secondary.main",
     budget: "24.5",
   },
   {
     id: "3",
-    name: "Christopher Jamil",
-    post: "Project Manager",
-    pname: "MedicalPro WP Theme",
+    name: "Dr. Sarah Lee",
+    post: "General Practitioner",
+    pname: "Community Health Initiative",
     priority: "High",
     pbg: "error.main",
     budget: "12.8",
   },
   {
     id: "4",
-    name: "Nirav Joshi",
-    post: "Frontend Engineer",
-    pname: "Hosting Press HTML",
+    name: "Ms. Emily Davis",
+    post: "Teacher",
+    pname: "STEM Education Program",
     priority: "Critical",
     pbg: "success.main",
     budget: "2.4",
   },
 ];
 
-const ProductPerfomance = () => {
+const ProductPerformance = () => {
   return (
-    <BaseCard title="Product Perfomance">
+    <BaseCard title="Assets Performance">
       <TableContainer
         sx={{
           width: {
@@ -83,7 +83,7 @@ const ProductPerfomance = () => {
               </TableCell>
               <TableCell>
                 <Typography color="textSecondary" variant="h6">
-                  Name
+                  Project
                 </Typography>
               </TableCell>
               <TableCell>
@@ -100,7 +100,7 @@ const ProductPerfomance = () => {
           </TableHead>
           <TableBody>
             {products.map((product) => (
-              <TableRow key={product.name}>
+              <TableRow key={product.id}>
                 <TableCell>
                   <Typography fontSize="15px" fontWeight={500}>
                     {product.id}
@@ -147,4 +147,4 @@ const ProductPerfomance = () => {
   );
 };
 
-export default ProductPerfomance;
+export default ProductPerformance;

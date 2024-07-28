@@ -12,33 +12,33 @@ const activities = [
   {
     time: "09.50",
     color: "success.main",
-    text: "Meeting with John",
+    text: "150 Antibiotics in Stock (MY HOSPITAL) ",
   },
   {
-    time: "09.46",
+    time: "01.46",
     color: "secondary.main",
-    text: "Payment received from John Doe of $385.90",
+    text: "50 Water Meter A available in Water Supply House",
   },
   {
-    time: "09.47",
+    time: "02.35",
     color: "primary.main",
-    text: "Project Meeting",
+    text: "New Request for Data",
   },
   {
-    time: "09.48",
+    time: "04.48",
     color: "warning.main",
     text: "New Sale recorded #ML-3467",
   },
   {
-    time: "09.49",
+    time: "06.20",
     color: "error.main",
-    text: "Payment was made of $64.95 to Michael Anderson",
+    text: "Payment was made of Rs 500000",
   },
 ];
 
 const DailyActivity = () => {
   return (
-    <DashboardCard title="Daily Activity">
+    <DashboardCard title="Activities & Notifications">
       <Timeline
         sx={{
           p: 0,
