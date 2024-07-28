@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Box, AppBar, Toolbar, styled, Stack, IconButton, TextField, Button, CircularProgress, Typography, Container, Tooltip } from '@mui/material';
+import {
+  Box, AppBar, Toolbar, styled, Stack, IconButton, TextField, Button, CircularProgress, Typography, Container, Tooltip
+} from '@mui/material';
 import PropTypes from 'prop-types';
 import { IconMenu2, IconChevronDown, IconChevronUp } from '@tabler/icons-react';
 import Profile from './Profile';
@@ -21,7 +23,7 @@ const Header = ({ toggleMobileSidebar }: HeaderProps) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('https://3717-115-245-99-238.ngrok-free.app/ask', {
+      const response = await fetch('https://ab87-115-245-99-238.ngrok-free.app/ask', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -79,7 +81,9 @@ const Header = ({ toggleMobileSidebar }: HeaderProps) => {
                 flexGrow: 1,
                 textAlign: 'center',
                 fontWeight: 'bold',
-                color: '#FFA500', // Orange color for text
+                color: '#FFA500',
+                marginTop: 2,
+                marginBottom: 2,
               }}
             >
               Inventory Management System for IMC
@@ -121,7 +125,7 @@ const Header = ({ toggleMobileSidebar }: HeaderProps) => {
             {error && <Typography color="error" style={{ marginTop: '20px' }}>{error}</Typography>}
             {tankCount !== null && !loading && !error && (
               <Typography variant="h6" style={{ marginTop: '20px' }}>
-              {tankCount}
+                {tankCount}
               </Typography>
             )}
           </Box>
