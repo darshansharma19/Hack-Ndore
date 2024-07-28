@@ -1,119 +1,73 @@
-<!-- # flexy-bootstrap-lite-- >
-<!-- Heading of Template -->
-<h3><a href="https://flexy-mui-nextjs-free.netlify.app/">Live Demo</a></h3>
-<h1>
-  Flexy Next Js Free Admin
-</h1>
+# Inventory Management System
 
-<!-- Main image of Template -->
-<a target="_blank" href="https://www.wrappixel.com/templates/flexy-next-js-free-admin-template/">
-  <img src="https://www.wrappixel.com/wp-content/uploads/edd/2022/01/flexy-nextjs-free.jpg" />
-</a>
-
-<!-- Description of Template -->
-<p>
- Flexy Free Nextjs version is built with Most Popular Framework React Material-UI.
-
-The free version comes with elegant grid design that helps you play around with the look and feel of the web app the way you want. it's carefully hand crafted minimal admin template, Its build with modular and modern design.
-
-People love this react dashboard as it is well-known for creating a seamless experience for users with modern design helping to execute complex requirements. It readily offers UI elements, creative pages, and user-friendliness environment.
-</p>
-
-<!-- <h4><a href="https://wrappixel.com/demos/free-admin-templates/xtreme-admin-lite/xtreme-html/ltr/index.html">Free Version Demo Link</a></h4> -->
-
-<!-- ## Pro Version -->
-
-<!-- <a href="https://www.wrappixel.com/templates/xtremeadmin/"><img src="https://www.wrappixel.com/wp-content/uploads/2019/01/xtreme-admin-bootstrap-nw-1.jpg"/></a><br/>
-<h4><a href="https://www.wrappixel.com/demos/admin-templates/xtreme-admin/html/ltr/index.html">Demo</a></h4> -->
-
-<!-- Versions of Template -->
-<h2><a id="user-content-versions" class="anchor" aria-hidden="true" href="#versions"></a>Versions</h2>
-<table>
-<thead>
-<tr>
-<th>Bootstrap</th>
-<th>React</th>
-<th>Angular</th>
-<th>NextJs</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-  <a href="https://www.wrappixel.com/templates/flexy-bootstrap-admin-template/" rel="nofollow" width="150px">
-    <img src="https://www.wrappixel.com/wp-content/uploads/edd/2021/05/flexy.jpg" alt="Flexy Template  Bootstrap" style="max-width:150px;">
-  </a>
-</td>
-<td>
-  <a href="https://www.wrappixel.com/templates/flexy-react-material-dashboard-admin/" rel="nofollow" width="150px">
-    <img src="https://www.wrappixel.com/wp-content/uploads/edd/2021/07/flexy-react-admin.jpg" alt="Flexy Template  React" style="max-width:150px;">
-  </a>
-</td>
-      <td>
-  <a href="https://www.wrappixel.com/templates/flexy-material-angular-admin/" rel="nofollow" width="150px">
-    <img src="https://www.wrappixel.com/wp-content/uploads/2022/03/flexy-angular-pro.jpg" alt="Flexy Template  Angular" style="max-width:150px;">
-  </a>
-</td>
-  <td>
-  <a href="https://www.wrappixel.com/templates/flexy-nextjs-dashboard-material-ui/" rel="nofollow" width="150px">
-    <img src="https://www.wrappixel.com/wp-content/uploads/edd/2022/04/nextjs-flexy.jpg" alt="Flexy Template  NextJs" style="max-width:150px;">
-  </a>
-</td>
-</tr>
-</tbody>
-</table>
-
-<!-- Resources of Template -->
-<h2>Resources</h2>
-<ul>
-<li>  
-  Live Demo: <a href="https://demos.wrappixel.com/free-admin-templates/nextjs/flexy-nextjs-admin-free-dist/landingpage/" rel="nofollow">https://demos.wrappixel.com/free-admin-templates/nextjs/flexy-nextjs-admin-free-dist/landingpage/</a>
-</li>
-<li>
-    Download Page: <a href="https://www.wrappixel.com/templates/flexy-next-js-free-admin-template/" rel="nofollow">
-  https://www.wrappixel.com/templates/flexy-next-js-free-admin-template/</a>
-</li>
-<li>
-    <a href="https://www.wrappixel.com/templates/wrapkit/#demos" rel="nofollow">WrapKit </a>Complete UI Kit - For Website Projects
-</li>
-</ul>
-
-<!-- Licensing of Template -->
-<h2>Licensing</h2>
-<ul>
-  <li>
-    <p>Copyright 2022 Wrappixel (<a href="https://www.wrappixel.com/" rel="nofollow">https://www.wrappixel.com/</a>)</p>
-  </li>
-  <li>
-    <p>Licensed under MIT (<a href="https://www.wrappixel.com/license/">https://www.wrappixel.com/license/</a>)</p>
-  </li>
-</ul>
+![Home Image](public\images\readme\home.png)
+![Sidebar Image](public/images/readme/sidebar.png)
+![Our Logo](public\images\readme\logo.png)
 
 
-<!-- Upgrade to Premium version of Template -->
-<h2>Upgrade to Premium version</h2>
-<a target="_blank" href="https://www.wrappixel.com/templates/flexy-nextjs-dashboard-material-ui/">
-  <img src="https://www.wrappixel.com/wp-content/uploads/edd/2022/04/nextjs-flexy.jpg" />
-</a>
-<p>
-   Checkout our premium version of Flexy NextJs Admin for lots more features and ready to use page templates.<br>
-   <a href="https://flexy-next-js-dashboard.vercel.app/dashboards/dashboard1">Check Live Preview</a> | <a href="https://www.wrappixel.com/templates/flexy-nextjs-dashboard-material-ui/">Download</a>
-</p>
+## Table of Contents
+- [Overview](#overview)
+- [Home](#home)
+- [Tech Stack](#tech-stack)
+- [API Keys](#api-keys)
+- [Screenshots](#screenshots)
+- [Getting Started](#getting-started)
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
 
-<!-- Useful Links of Template -->
-<h2>Useful Links</h2>
-<ul>
-<li><a href="https://www.wrappixel.com/templates/category/admin-template/">Admin Panel Template</a> from WrapPixel</li>
-<li><a href="https://www.wrappixel.com/">Free Bootstrap 5 Themes</a> from WrapPixel</li>
-<li><a href="https://www.wrappixel.com/templates/category/bootstrap-admin-templates/">Bootstrap 5 Admin Template</a> from WrapPixel</li>
-<li><a href="https://www.wrappixel.com/templates/category/angular-templates/">Angular JS Dashboard</a> from WrapPixel</li>
-<li><a href="https://www.wrappixel.com/templates/category/react-templates/">React Website Templates</a> from WrapPixel</li>
-<li><a href="https://www.wrappixel.com/templates/category/vuejs-templates/">Vue JS Templates</a> from WrapPixel</li>
-<li><a href="https://www.wrappixel.com/templates/category/free-templates/">Free Themes</a> from WrapPixel</li>
-</ul>
+## Overview
+The Inventory Management System for Indore City is designed to streamline the management of various municipal services including Water Supply, Healthcare, and Transportation. The system provides real-time updates on activities, notifications, and performance metrics.
 
-<!-- Social Media of Wrappixel -->
-<h2>Social Media</h2>
-<p>Facebook: <a href="https://www.facebook.com/wrappixel">https://www.facebook.com/wrappixel</a></p>
-<p>Twitter: <a href="https://twitter.com/wrappixel">https://twitter.com/wrappixel</a></p>
-<p>Medium: <a href="https://medium.com/wrappixel">https://medium.com/wrappixel</a></p>
+## Home
+The home page displays the following sections:
+
+### Activities & Notifications
+- Displays recent activities and notifications related to the inventory system.
+
+### Assets Performance
+- Shows the performance metrics of various assets managed by the system.
+
+### Water Supply Services in Indore
+- Provides information and updates about the water supply services.
+
+### Health Care Services in Indore
+- Shows details and notifications about healthcare services.
+
+### Transportation Services in Indore
+- Provides updates and performance metrics for transportation services in the city.
+
+## Tech Stack
+The project is built using the following technologies:
+1. ReactJS
+2. Next.js
+3. API data
+4. Plotly
+5. Django
+6. Django REST framework
+7. Flask
+8. FastAPI
+
+## API Keys
+For accessing various services, the following API keys are used:
+- [API Key 1](https://ab87-115-245-99-238.ngrok-free.app)
+- [API Key 2](https://ab87-115-245-99-238.ngrok-free.app)
+
+
+## Getting Started
+To get a local copy up and running follow these simple steps.
+
+### Prerequisites
+- Node.js
+- Python
+
+### Installation
+
+1. Clone the repo
+   ```sh
+   git clone  https://github.com/darshansharma19/Hack-Ndore
+
+
+2. Vercel Deploy 
+ ```sh
+    https://hack-ndore.vercel.app/
