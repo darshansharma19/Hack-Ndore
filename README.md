@@ -1,8 +1,8 @@
 # Inventory Management System
 
-![Sidebar Image](public\images\readme\sidebar.png)
-![Home Image](public\images\readme\home.png)
-![Logo](public\images\readme\logo.png)
+![Sidebar Image](public/images/readme/sidebar.png)
+![Home Image](public/images/readme/home.png)
+![Logo](public/images/readme/logo.png)
 
 ## Table of Contents
 - [Overview](#overview)
@@ -51,6 +51,12 @@ The project is built using the following technologies:
 For accessing various services, the following API keys are used:
 - [API Key 1](https://ab87-115-245-99-238.ngrok-free.app)
 
+## Screenshots
+![Activities & Notifications](public/images/readme/activities_notifications.png)
+![Assets Performance](public/images/readme/assets_performance.png)
+![Water Supply Services in Indore](public/images/readme/water_supply_services.png)
+![Health Care Services in Indore](public/images/readme/health_care_services.png)
+![Transportation Services in Indore](public/images/readme/transportation_services.png)
 
 ## Getting Started
 To get a local copy up and running follow these simple steps.
@@ -64,11 +70,3 @@ To get a local copy up and running follow these simple steps.
 1. Clone the repo
    ```sh
    git clone https://github.com/yourusername/inventory-management-system.git
-
-2. Deployed Link
-    ```sh
-    https://hack-ndore.vercel.app/
-
-3.Reference Link
-   ```sh
-    https://imcindore.mp.gov.in/
