@@ -1,8 +1,8 @@
 # Inventory Management System
-
-![Sidebar Image](public/images/readme/sidebar.png)
-![Home Image](public/images/readme/home.png)
+# The Project is live at https://hack-ndore.vercel.app/
 ![Logo](public/images/readme/logo.png)
+![Home Image](public/images/readme/home.png)
+
 
 ## Table of Contents
 - [Overview](#overview)
@@ -46,17 +46,21 @@ The project is built using the following technologies:
 6. Django REST framework
 7. Flask
 8. FastAPI
+## API repositories
+https://github.com/Anuj-malviya0/watergraphhttps://github.com/Anuj-malviya0/watergraph
+
+https://github.com/Anuj-malviya0/graphsapi
+
+https://github.com/Anuj-malviya0/predictapi
+
+https://github.com/Anuj-malviya0/transportapi
+
+https://github.com/Anuj-malviya0/healthapi
+
 
 ## API Keys
 For accessing various services, the following API keys are used:
 - [API Key 1](https://ab87-115-245-99-238.ngrok-free.app)
-
-## Screenshots
-![Activities & Notifications](public/images/readme/activities_notifications.png)
-![Assets Performance](public/images/readme/assets_performance.png)
-![Water Supply Services in Indore](public/images/readme/water_supply_services.png)
-![Health Care Services in Indore](public/images/readme/health_care_services.png)
-![Transportation Services in Indore](public/images/readme/transportation_services.png)
 
 ## Getting Started
 To get a local copy up and running follow these simple steps.
@@ -70,3 +74,10 @@ To get a local copy up and running follow these simple steps.
 1. Clone the repo
    ```sh
    git clone https://github.com/yourusername/inventory-management-system.git
+2. Install node Packages
+    ```sh
+     npm install
+3. Run
+   ```sh
+     
+   npm run dev   
